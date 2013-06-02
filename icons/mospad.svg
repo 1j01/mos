@@ -1,0 +1,10 @@
+<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+ <title>MOSpad</title>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1">
+   <path stroke="#00ff00" transform="rotate(180 126.237 148.813)" id="svg_2" d="m85.286,269.33701c-2.03101,-10.71402 0.937,-34.427 -1.094,-45.14101l-49.3812,-1.035l48.4752,45.17601l134.376,1l0,-241.04801l-182.85118,0l-1,195.872" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="5" fill="#009600"/>
+  </g>
+  <path fill="#009600" stroke="#00ff00" stroke-width="5" d="m258,71l-125,128l-6,21l21,-8l124,-127l-14,-14z" id="svg_3"/>
+ </g>
+</svg>
