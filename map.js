@@ -57,9 +57,11 @@ WorldMap = (function(map){
 				gui.msg(JSON.stringify(m.hover));
 				return false;
 			}
+			document.documentElement.className="dragging-somewhere";
 			md=true;
 		};
 		addEventListener("mouseup",function(){
+			document.documentElement.className="";
 			md=false;
 		},true);
 		
