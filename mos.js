@@ -434,37 +434,33 @@ addEventListener('contextmenu', function(e){
 	e.preventDefault();return!1;
 }, true);
 
-mouse={x:-50,y:-50};
 
-/*requestAnimationFrame(function animate(){
+/*var ctx=$canvasOverlay.getContext("2d");
+requestAnimationFrame(function animate(){
 	requestAnimationFrame(animate);
 	if($canvasOverlay.width!=innerWidth){
 		$canvasOverlay.width=innerWidth;
+		console.log("wwwww");
 	}
 	if($canvasOverlay.height!=innerHeight){
 		$canvasOverlay.height=innerHeight;
+		console.log("hhhhh");
 	}
-	var ctx=$canvasOverlay.getContext("2d");
 	ctx.clearRect(0,0,$canvasOverlay.width,$canvasOverlay.height);
 	ctx.fillStyle="#0F0";
 	//ctx.fillRect(500+Math.random()*50,500,100,100);
 	ctx.strokeStyle="#0F0";
-	drawPipe(ctx,100,100,500,500);
+	//drawPipe(ctx,100,100,500,500);
 	//drawPipes(ctx);
 	//drawCursor(ctx, mouse.x, mouse.y);
-});*/
+}, $canvasOverlay);*/
 
-(function() {
-	window.onmousemove = handleMouseMove;
-	function handleMouseMove(event) {
-		event = event || window.event; // IE-ism
-		mouse = {
-			x:event.clientX,
-			y:event.clientY,
-			$:document.elementFromPoint(event.clientX,event.clientY)
-		};
-		//console.log($over.style);
-		//console.log(getComputedStyle($over).cursor);
-	}
-})();
+mouse={x:-50,y:-50};
+onmousemove = function(e){
+	mouse = {
+		x:e.clientX,
+		y:e.clientY,
+		$:document.elementFromPoint(e.clientX,e.clientY)
+	};
+};
 

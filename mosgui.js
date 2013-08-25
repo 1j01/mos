@@ -1,12 +1,31 @@
 
+/*
 
-function Modal(_gui){
-	var gui=_gui||window.gui;
+#gui (gui.element)
+	.modal ($m)
+		.titlebar ($tb)
+			.title ($t)
+			.close-x ($x)
+		.content ($c)
+			...
+*/
+function Modal(_parent){
+	var that=this;
+	var gui=window.gui;
+	if(_parent){
+		if(_parent.overlay){
+			gui=_parent;
+		}else if(_parent.close && _parent.children instanceof Array){
+			this.parent = _parent;
+			_parent.children.push(this);
+		}else{
+			throw _parent;
+		}
+	}
 	if(!gui.element || !gui.element instanceof HTMLElement){
-		console.warn("gui.element not initialized. Creating the default overlay.",gui.element);
+		//console.warn("gui.element not initialized. Creating the default overlay.",gui.element);
 		gui.overlay();
 	}
-	var that=this;
 	gui.modals.push(this);
 	
 	this.$m=document.createElement("div"); this.$m.className="modal";
@@ -26,6 +45,8 @@ function Modal(_gui){
 	setTimeout(function(){
 		that.$m.style.opacity=1;
 	},1);
+	
+	this.children=[];
 	
 	this.x=0;
 	this.y=0;
@@ -90,9 +111,6 @@ function Modal(_gui){
 					if(x=="random"){
 						thoust.x=10+Math.random()*(gw-mw-20);
 						thoust.y=10+Math.random()*(gh-mh-20);
-					}else if(x=="bounds"){
-						thoust.x=Math.min(Math.max(thoust.x,10),gw-mw-10);
-						thoust.y=Math.min(Math.max(thoust.y,10),gh-mh-10);
 					}else{
 						if(x.match(/top|bottom|center/)) thoust.x=gw/2-mw/2;
 						if(x.match(/left|right|center/)) thoust.y=gh/2-mh/2;
@@ -100,6 +118,9 @@ function Modal(_gui){
 						if(x.match(/bottom/)) thoust.y=gh-mh-10;
 						if(x.match(/left/)) thoust.x=10;
 						if(x.match(/right/)) thoust.x=gw-mw-10;
+						thoust.x=Math.max(Math.min(thoust.x,gw-mw-10),10);
+						thoust.y=Math.max(Math.min(thoust.y,gh-mh-10),10);
+						//thoust.y=Math.min(Math.max(thoust.y,10),gh-mh-10);
 					}
 					thoust.$m.style.left=(thoust.x-thoust.ox)+"px";
 					thoust.$m.style.top=(thoust.y-thoust.oy)+"px";
@@ -108,6 +129,12 @@ function Modal(_gui){
 			}else{
 				if(x)this.x=x;
 				if(y)this.y=y;
+					var gw=gui.element.clientWidth;
+					var gh=gui.element.clientHeight;
+					var mw=this.$m.scrollWidth;
+					var th=this.$tb.scrollHeight;
+						this.x=Math.max(Math.min(this.x,gw-mw-2),2);
+						this.y=Math.max(Math.min(this.y,gh-th-5),2);
 				this.$m.style.left=(this.x)+"px";
 				this.$m.style.top=(this.y)+"px";
 				this.onmove&&this.onmove();

@@ -28,7 +28,7 @@ servers = [
 WorldMap = (function(map){
 	
 	var $c=document.createElement("canvas");
-	draw($c.getContext("2d"),($c.width=$c.height=128),-3810.9999999999989);
+	draw($c.getContext("2d"),$c.width=$c.height=128,-3810.9999999999989);
 	worldMapIconURI = $c.toDataURL("image/png");
 	
 	return function(){
@@ -39,38 +39,40 @@ WorldMap = (function(map){
 			ctx=$c.getContext('2d'),
 			rot=0,rots=0,
 			d=$c.width=$c.height=450,
-			md=false;
+			dragging=false;
 		
 		m.mx=m.my=m.hover=null;
 		
-		setInterval(function(){draw(ctx,d,rot+=rots*=0.9,servers,m);},30);
+		var iid = setInterval(function(){draw(ctx,d,rot+=rots*=!dragging*0.2+0.7,servers,m);},30);
 		
-		function spinMeYay(ev){
-			if(md)
-				rots+=(ev.clientX-$c.offsetLeft-m.mx);
-			m.mx=ev.clientX-$c.offsetLeft;
-			m.my=ev.clientY-$c.offsetTop;
+		function weeeeeeeeeeeeeee(ev){
+			var newmx = ev.clientX-$c.getBoundingClientRect().left;
+			rots+=dragging*(newmx-m.mx)*3;
+			m.mx=newmx;
+			m.my=ev.clientY-$c.getBoundingClientRect().top;
 		}
-		addEventListener("mousemove",spinMeYay,true);
+		addEventListener("mousemove",weeeeeeeeeeeeeee,true);
 		$c.onmousedown=function(ev){
 			if(m.hover){
-				gui.msg(JSON.stringify(m.hover));
-				return false;
+				return!
+					new Modal(m)
+					.title("Server")
+					.content("<pre>"+JSON.stringify(m.hover, null, ">").replace(/["{}>]/g,""));
 			}
 			document.documentElement.className="dragging-somewhere";
-			md=true;
+			dragging=true;
 		};
 		addEventListener("mouseup",function(){
 			document.documentElement.className="";
-			md=false;
+			dragging=false;
 		},true);
 		
 		return m;
 		
 	};
 	
-	function v3(x,y,d){return Math.cos(x/1600)>-0.2;}
-	function x3(x,y,d){return Math.sin(x/1600)*Math.sin(y/1900)*(d/2-5)+d/2;}
+	function v3(x,y,d){return Math.cos(x/1500)>-0.2;}
+	function x3(x,y,d){return Math.sin(x/1500)*Math.sin(y/1900)*(d/2-5)+d/2;}
 	function y3(x,y,d){return Math.cos(y/1900+Math.PI)*(d/2-5)+d/2;}
 	//function x3(x,y,d,t){x+=t;return Math.sin((-x)/7200)*Math.sin(y/190+x/499)*(d/2-5)+d/2;}
 	//function y3(x,y,d,t){x+=t;return Math.cos(y/1900+Math.PI)*(d/2-5)+d/2;}
@@ -79,7 +81,7 @@ WorldMap = (function(map){
 		ctx.beginPath();
 		// loop through paths
 		var vis=0;
-		for (var iPath=0; iPath<country.length; iPath++){
+		for(var iPath=0; iPath<country.length; iPath++){
 			var p=country[iPath][0];
 			//ctx.fillRect(x3(p[0],p[1],d,rot), y3(p[0],p[1],d,rot), 1,1);
 			//if(!v3(p[0]+rot,p[1],d,rot))return false;
@@ -115,7 +117,7 @@ WorldMap = (function(map){
 		
 		ctx.fillStyle = "rgba(0,155,0,0.5)";
 		ctx.strokeStyle = "rgba(0,255,0,0.5)";
-		for (var k in map) {
+		for(var k in map){
 			drawCountry(ctx,d,rot, map[k]);
 		}
 		
@@ -123,7 +125,7 @@ WorldMap = (function(map){
 		ctx.strokeStyle = "rgba(0,255,0,0.9)";
 		if(servers){
 			m.hover=null;
-			for(var k in servers) {
+			for(var k in servers){
 				var s=servers[k];
 				if(!v3(s.x+rot,s.y))continue;
 				var x=x3(s.x+rot,s.y,d);
@@ -191,7 +193,7 @@ WorldMap = (function(map){
 	"de":[[[4823,2038],[4827,2026],[4871,2018],[4867,1982],[4891,1982],[4907,1998],[4931,1998],[4927,2014],[4983,1998],[5011,2018],[5019,2046],[5011,2054],[5023,2066],[5031,2122],[4963,2146],[5003,2198],[4975,2218],[4979,2238],[4839,2238],[4855,2190],[4807,2174],[4811,2162],[4799,2150],[4807,2142],[4799,2126],[4787,2126],[4803,2102],[4795,2090],[4819,2086],[4827,2042]]],
 	"dj":[[[5771,3254],[5751,3258],[5739,3278],[5739,3298],[5767,3298],[5775,3286],[5763,3282],[5779,3270]]],
 	"dk":[[[4867,1982],[4891,1982],[4895,1958],[4915,1978],[4923,1962],[4907,1954],[4899,1958],[4899,1954],[4927,1922],[4911,1918],[4915,1874],[4887,1898],[4867,1898],[4851,1922],[4851,1958],[4867,1962]],[[4967,1938],[4951,1942],[4951,1950],[4943,1942],[4931,1954],[4935,1970],[4959,1978],[4959,1970],[4967,1966],[4959,1958],[4971,1954]]],
-	"dk":[[[4867,1982],[4891,1982],[4895,1958],[4915,1978],[4923,1962],[4907,1954],[4899,1958],[4899,1954],[4927,1922],[4911,1918],[4915,1874],[4887,1898],[4867,1898],[4851,1922],[4851,1958],[4867,1962]],[[4967,1938],[4951,1942],[4951,1950],[4943,1942],[4931,1954],[4935,1970],[4959,1978],[4959,1970],[4967,1966],[4959,1958],[4971,1954]],[[4931,1978],[4927,1986],[4943,1994],[4955,1990],[4963,1978],[4947,1978],[4943,1982]]],
+	"dk_":[[[4867,1982],[4891,1982],[4895,1958],[4915,1978],[4923,1962],[4907,1954],[4899,1958],[4899,1954],[4927,1922],[4911,1918],[4915,1874],[4887,1898],[4867,1898],[4851,1922],[4851,1958],[4867,1962]],[[4967,1938],[4951,1942],[4951,1950],[4943,1942],[4931,1954],[4935,1970],[4959,1978],[4959,1970],[4967,1966],[4959,1958],[4971,1954]],[[4931,1978],[4927,1986],[4943,1994],[4955,1990],[4963,1978],[4947,1978],[4943,1982]]],
 	"dm":[[[3024.5,3173.5],[3030.62,3177.12],[3030.38,3184.25],[3027.62,3185.25]]],
 	"do":[[[2755,3062],[2755,3106],[2763,3118],[2787,3098],[2839,3102],[2847,3094],[2779,3058]]],
 	"dz":[[[4863,2574],[4859,2626],[4835,2666],[4879,2718],[4887,2770],[4887,2886],[4955,2958],[4831,3034],[4795,3074],[4751,3082],[4723,3082],[4667,3026],[4506.85,2917.81],[4411,2854],[4411,2842],[4411,2814],[4539,2742],[4539,2726],[4607,2714],[4583,2630],[4719,2574]]],

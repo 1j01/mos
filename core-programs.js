@@ -58,24 +58,26 @@ function MosPad(file){
 		},
 		readOnly: true
 	}]);
+	var mus,msa;
 	m.onclose = function(){
+		if(mus)return true;
 		if(file? (file_get_contents(file.fname) !== a.getValue()): a.getValue()){
-			var us=new Modal();
-			us.title("Unsaved");
-			us.content("The file is unsaved.<br><button class='save'>Save</button><button class='close'>Close</button><button class='cancel'>Cancel</button>");
-			us.$(".save").onclick = function(){
+			mus=new Modal();
+			mus.title("Unsaved");
+			mus.content("The file is unsaved.<br><button class='save'>Save</button><button class='close'>Close</button><button class='cancel'>Cancel</button>");
+			mus.$(".save").onclick = function(){
 				save();
 				if(file)m.close();
-				us.close();
+				mus.close();
 			};
-			us.$(".close").onclick = function(){
+			mus.$(".close").onclick = function(){
 				m.close();
-				us.close();
+				mus.close();
 			};
-			us.$(".cancel").onclick = function(){
-				us.close();
+			mus.$(".cancel").onclick = function(){
+				mus.close();
 			};
-			us.position(m.x+100,m.y+100);
+			mus.position(m.x+100,m.y+100);
 			return false;
 		}
 		return true;
@@ -83,10 +85,12 @@ function MosPad(file){
 	function save(){
 		if(file&&file.fname){
 			file_put_contents(file.fname, a.getValue());
+			if(msa)msa.close();
 		}else{
-			gui.prompt("Save As","",function(newname){
+			if(msa)return msa.focus();
+			msa=gui.prompt("Save as...","",function(newname){
 				file = file || {};
-				file.fname=newname;
+				file.fname = newname;
 				m.title(file.fname+" - MosPad");
 				file_put_contents(file.fname, a.getValue());
 			}).position("center");
@@ -111,13 +115,13 @@ function Terminal(cb){
 	a.focus();
 	m.terminal = {
 		log: function(str){
-			$lines.innerHTML+=str.replace(/\n/g,BR)+BR;
+			$lines.innerHTML += str.replace(/\n/g,BR)+BR;
 		},
 		write: function(str){
-			$lines.innerHTML+=str.replace(/\n/g,BR);
+			$lines.innerHTML += str.replace(/\n/g,BR);
 		},
 		clear: function(str){
-			$lines.innerHTML=(str||"").replace(/\n/g,BR);
+			$lines.innerHTML = (str||"").replace(/\n/g,BR);
 		},
 		focus: function(){
 			a.focus();
@@ -136,7 +140,6 @@ function Terminal(cb){
 		exec: function(editor, line) {
 			var cmd = editor.getValue().replace(/[\n\r]/gim,"");
 			editor.removeLines();
-			setTimeout(function(){editor.removeLines();},0);
 			if(cmd){
 				m.terminal.log("<span class='PS2'>&gt;</span> "+cmd);
 				if(cmds.indexOf(cmd)!=-1){
@@ -146,29 +149,22 @@ function Terminal(cb){
 				cmdi=cmds.length;
 				cb(cmd, m.terminal);
 			}
-			return false;
+			return true;
 		},
 		readOnly: true
 	}]);
 	a.commands.addCommands([{
 		name: "previous command",
-		bindKey: {
-			win: "Up",
-			mac: "Up"
-		},
-		exec: function(editor, line) {
+		bindKey: "Up",
+		exec: function(editor, line){
 			editor.setValue((--cmdi<0)?((cmdi=-1)&&""):cmds[cmdi].replace(/\n/,""));
 			return false;
 		},
 		readOnly: true
-	}]);
-	a.commands.addCommands([{
+	},{
 		name: "next command",
-		bindKey: {
-			win: "Down",
-			mac: "Down"
-		},
-		exec: function(editor, line) {
+		bindKey: "Down",
+		exec: function(editor, line){
 			editor.setValue((++cmdi>=cmds.length)?((cmdi=cmds.length)&&""):cmds[cmdi].replace(/\n/,""));
 			return false;
 		},
