@@ -26,7 +26,7 @@ function FolderView($cont, path){
 		try{
 			var folder = filepath(fv.path);
 			if(folder && folder.files){
-				if(folder.files.length){
+				if(folder.files != {}){
 					for(var i in folder.files){
 						var ic=new Icon(folder.files[i],fv.$view);
 						ic.name=i;
@@ -44,20 +44,24 @@ function FolderView($cont, path){
 	}
 }
 
-function EXECUTE_MALICIOUS (str, terminal){
+function EXECUTE_MALICIOUS(str, terminal){
+	var ret = "Invalid command.";
 	if(str.match(/\s*[\w\-]*\s*\?\s*/)){
-		terminal.log(help(str.replace("?","")));
-		return;
-	}
-	var m = str.match(/([\w\-]+)(?:\s+(.+))?/);
-	if(m){
-		var tmp = open(m[0],m[1]);
-		if(tmp){
-			return tmp;
+		ret = help(str.replace("?",""));
+	}else{
+		var m = str.match(/([\w\-]+)(?:\s+(.+))?/);
+		if(m){
+			var tmp = open(m[1],m[2]);
+			if(tmp){
+				return tmp;
+			}else{
+				ret = "Unknown command '"+m[1]+"'.";
+			}
 		}
 	}
 	
-	terminal.log("ERROR");
+	terminal&&terminal.log(ret);
+	return ret;
 }
 
 function help(on){
@@ -81,12 +85,13 @@ function open(prg,arg){
 	var m = null;
 	switch(prg.toLowerCase()){
 		case "terminal":
-			m = new Terminal();
+			m = new Terminal(arg);
 			break;
 		case "mospad":
-			m = new MosPad(arg && filepath(arg));
+			m = new MosPad(arg);
 			break;
 		case "filebrowser":
+		case "folder":
 			m = new FileBrowser(arg && filepath(arg));
 			break;
 		case "webbrowser":
@@ -106,15 +111,15 @@ function open(prg,arg){
 }
 
 
-function Icon(ob, parent){
-	parent = parent || $desktop;
+function Icon(ob, $parent){
+	$parent = $parent || $desktop;
 	var o = {};
 	o.$div = document.createElement("div");
 	o.$img = document.createElement("img");
 	o.$name = document.createElement("span");
 	o.$div.appendChild(o.$img);
 	o.$div.appendChild(o.$name);
-	parent.appendChild(o.$div);
+	$parent.appendChild(o.$div);
 	
 	for(var k in ob){
 		if(ob.hasOwnProperty(k)){
@@ -133,6 +138,25 @@ function Icon(ob, parent){
 			new FileBrowser(o.fname);
 		}else{
 			gui.msg("Unknown file type.");
+		}
+	};
+	o.$div.oncontextmenu = function(e){
+		var $menu = document.createElement("div");
+		$menu.className = "context-menu";
+		$menu.style.position = "absolute";
+		$menu.style.left = e.clientX + "px";
+		$menu.style.top = e.clientY + "px";
+		$menu.innerHTML = "<button class='rm'>Delete</button><button class='cp'>Copy</button>";
+		$parent.appendChild($menu);
+		
+		$menu.querySelector(".rm").onclick = function(){
+			gui.msg("remove? really haha");
+		};
+		
+		addEventListener("mousedown",hideMenu);
+		function hideMenu(){
+			$parent.removeChild($menu);
+			removeEventListener("mousedown",hideMenu);
 		}
 	};
 	o.$div.className="icon";
@@ -188,10 +212,36 @@ function file_put_contents(fname,str){
 		localStorage.mosfiles=JSON.stringify(files);
 	}finally{}
 }
+function file_delete(fname){
+	var fna=fname.split("/"),folder={files:files};
+	if(fna[0]==="")fna.splice(0,1);
+	for(var i=0;i<fna.length-1;i++){
+		if(!folder.files){
+			throw new Error("Not a folder!");
+		}
+		folder=folder.files[fna[i]];
+		if(!folder){
+			throw new Error("Not found!"+folder+", "+fna);
+		}
+	}
+	if(!folder.files){
+		throw new Error("Not a folder!");
+	}
+	delete folder.files[fna[i]];
+	for(var i in folderviews){
+		if(folderviews[i].path === fname.replace(/\/?[^\/]+$/,"")){
+			folderviews[i].path = folderviews[i].path;
+		}
+	}
+	try{
+		localStorage.mosfiles=JSON.stringify(files);
+	}catch(e){}
+}
 function file_get_contents(fname){
 	//throw new Error("FLAKE");
 	var folder={files:files,type:"folder"};
 	if(fname==="")throw new Error("Can't read a folder! (desktop)");
+	if(!fname)throw new Error("Can't read nothing!");
 	var fna=fname.split("/");
 	if(fna[0]==="")fna.splice(0,1);
 	
@@ -222,6 +272,7 @@ function filepath(fname){
 	var fna=fname.split("/");
 	if(fna[0]==="")fna.splice(0,1);
 	for(var i=0;i<fna.length;i++){
+		if(fna[i]==="")continue;
 		if(!folder.files){
 			throw new Error("Not a folder!");
 		}
@@ -416,7 +467,7 @@ new FolderView($desktop);
 new Icon({type:"link",cmd:"terminal",name:"Terminal"});
 new Icon({type:"link",cmd:"mospad"});
 new Icon({type:"link",cmd:"worldmap",name:"World Map"});
-new Icon({type:"link",cmd:"monochromium",name:"MonoChrome"});
+if(Math.random()<0.01)new Icon({type:"link",cmd:"monochromium",name:"MonoChrome"});
 /*link("terminal");
 link("mospad");
 //link("webbrowser");

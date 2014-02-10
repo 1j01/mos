@@ -10,21 +10,23 @@ var BR = "<br>";
 
 */
 
-function MosPad(file){
+function MosPad(fname){
 	var m = new Modal();
 	m.className = "MosPad";
 	m.$m.className += " MosPad";
+	var file=null;
 	m.title((file&&file.name||"New")+" - MosPad");
 	m.content("<div class='editor'></div>");
 	var a=ace.edit(m.$(".editor"));
 	a.renderer.setShowGutter(false);
 	a.setShowPrintMargin(false);
 	a.getSession().setUseSoftTabs(false);
-	if(file&&file.content){
-		a.setValue(file_get_contents(file.fname));
+	if(fname){
+		a.setValue(file_get_contents(fname));
 		a.gotoLine(0);
 	}
 	m.resizable();
+	var find;
 	a.commands.addCommands([{
 		name: "find",
 		bindKey: {
@@ -32,10 +34,13 @@ function MosPad(file){
 			mac: "Command-F"
 		},
 		exec: function(editor, line) {
-			var find = gui.prompt("Find",a.session.getTextRange(a.getSelectionRange()),function(needle){
-				
+			if(find){
+				find.close();
+			}//else{
+			find = gui.prompt("Find",a.session.getTextRange(a.getSelectionRange()),function(needle){
+				a.find(needle,{ backwards: false, wrap: true, caseSensitive: true, wholeWord: false, regExp: false });
 			});
-			
+			//}
 			return false;
 		},
 		readOnly: true
@@ -60,47 +65,70 @@ function MosPad(file){
 	}]);
 	var mus,msa;
 	m.onclose = function(){
-		if(mus)return true;
-		if(file? (file_get_contents(file.fname) !== a.getValue()): a.getValue()){
+		if(find)find.close();
+		if(mus){
+			mus.close();
+			mus=null;
+		}else if(a.getValue() !== (fname?file_get_contents(fname):"")){
 			mus=new Modal();
 			mus.title("Unsaved");
-			mus.content("The file is unsaved.<br><button class='save'>Save</button><button class='close'>Close</button><button class='cancel'>Cancel</button>");
+			mus.content("The file has been changed.<br><button class='save'>Save</button><button class='close'>Close</button><button class='cancel'>Cancel</button>");
 			mus.$(".save").onclick = function(){
 				save();
 				if(file)m.close();
+				if(find)find.close();
 				mus.close();
 			};
 			mus.$(".close").onclick = function(){
 				m.close();
 				mus.close();
+				if(find)find.close();
 			};
 			mus.$(".cancel").onclick = function(){
 				mus.close();
 			};
+			mus.onclose = function(){
+				mus = null;
+				return true;
+			};
 			mus.position(m.x+100,m.y+100);
 			return false;
+		}
+		if(msa){
+			msa.close();
+			msa=null;
 		}
 		return true;
 	};
 	function save(){
 		if(file&&file.fname){
 			file_put_contents(file.fname, a.getValue());
-			if(msa)msa.close();
+			if(msa){
+				msa.close();
+				msa = null;
+			}
 		}else{
-			if(msa)return msa.focus();
+			if(msa){
+				msa.close();
+				msa = null;
+			}
 			msa=gui.prompt("Save as...","",function(newname){
 				file = file || {};
 				file.fname = newname;
 				m.title(file.fname+" - MosPad");
 				file_put_contents(file.fname, a.getValue());
 			}).position("center");
+			msa.onclose = function(){
+				msa = null;
+				return true;
+			};
 		}
 	}
 	return m;
 }
 
-function Terminal(cb){
-	if(!cb)cb=EXECUTE_MALICIOUS;
+function Terminal(arg){
+	var cb=EXECUTE_MALICIOUS;
 	var m = new Modal();
 	m.className = "terminal";
 	m.$m.className += " terminal";
@@ -188,6 +216,9 @@ function Terminal(cb){
 		}
 		console.log(e.keyCode);
 	};*/
+	if(arg){
+		cb(arg, m.terminal);
+	}
 	return m;
 }
 function WebBrowser(url){

@@ -203,6 +203,11 @@ function Modal(_parent){
 		gui.modals.splice(gui.modals.indexOf(this),1);
 		return $m;
 	};
+	this.adopt = function(kid){
+		this.children.push(kid);
+		kid.parent = this;
+		kid.position(this.x+this.$m.clientHeight/2-kid.$m.clientWidth/2,this.y+this.$m.clientHeight/2-kid.$m.clientHeight/2);
+	};
 	/*this.style=function(css){
 		this.$c.style.cssText=css;
 	};*/

@@ -1,35 +1,34 @@
 
 // http://en.wikipedia.org/wiki/Server_(computing)#Types_of_servers
 
-servers = [
-	{	domain: "ftp.zi-xen.info",
-		ip: "139.28.60.34",
-		type: "files",
-		x:500, y:6250,
-	},
-	{	domain: "db.zi-xen.info",
-		ip: "139.28.60.34",
-		type: "database",
-		x:3340, y:4450,
-	},
-	{	domain: "pro.xyz",
-		ip: "133.46.26.85",
-		type: "proxy",
-		security: "hallpass required",
-		x:2450, y:3550,
-	},
-	{	domain: "auth.faceboo.kr",
-		ip: "136.27.47.11",
-		type: "authentification",
-		x:1750, y:8350,
-	},
-];
+servers = [{
+	domain: "ftp.zi-xen.info",
+	ip: "139.28.60.34",
+	type: "files",
+	x:500, y:6250,
+},{	
+	domain: "db.zi-xen.info",
+	ip: "139.28.60.34",
+	type: "database",
+	x:1340, y:4450,
+},{
+	domain: "pro.xyz",
+	ip: "133.46.26.85",
+	type: "proxy",
+	security: "hallpass required",
+	x:50, y:3550,
+},{
+	domain: "auth.faceboo.kr",
+	ip: "136.27.47.11",
+	type: "authentification",
+	x:1350, y:8350,
+}];
 
 WorldMap = (function(map){
 	
-	var $c=document.createElement("canvas");
-	draw($c.getContext("2d"),$c.width=$c.height=128,-3810.9999999999989);
-	worldMapIconURI = $c.toDataURL("image/png");
+	var $ic=document.createElement("canvas");
+	draw($ic.getContext("2d"),$ic.width=$ic.height=128,-3810.9999999999989);
+	worldMapIconURI = $ic.toDataURL("image/png");
 	
 	return function(){
 		var m = new Modal()
@@ -43,7 +42,10 @@ WorldMap = (function(map){
 		
 		m.mx=m.my=m.hover=null;
 		
-		var iid = setInterval(function(){draw(ctx,d,rot+=rots*=!dragging*0.2+0.7,servers,m);},30);
+		var iid = setInterval(function(){
+			draw(ctx,d,rot+=rots*=!dragging*0.2+0.7,servers,m);
+			$c.style.cursor = m.hover?'url("cursors/pointer.png") 5 2, pointer':'';
+		},30);
 		
 		function weeeeeeeeeeeeeee(ev){
 			var newmx = ev.clientX-$c.getBoundingClientRect().left;
@@ -55,9 +57,10 @@ WorldMap = (function(map){
 		$c.onmousedown=function(ev){
 			if(m.hover){
 				return!
-					new Modal(m)
+					new Modal()
+					.position(20+m.hover.cx+m.x,m.y+m.hover.cy+20)
 					.title("Server")
-					.content("<pre>"+JSON.stringify(m.hover, null, ">").replace(/["{}>]/g,""));
+					.content("<pre>"+JSON.stringify(m.hover, null, "```.").replace(/["{}]|```./g,""));
 			}
 			document.documentElement.className="dragging-somewhere";
 			dragging=true;
@@ -117,24 +120,24 @@ WorldMap = (function(map){
 		
 		ctx.fillStyle = "rgba(0,155,0,0.5)";
 		ctx.strokeStyle = "rgba(0,255,0,0.5)";
-		for(var k in map){
-			drawCountry(ctx,d,rot, map[k]);
+		for(var _c in map){
+			drawCountry(ctx,d,rot, map[_c]);
 		}
 		
 		ctx.fillStyle = "rgba(0,155,0,1)";
 		ctx.strokeStyle = "rgba(0,255,0,0.9)";
 		if(servers){
 			m.hover=null;
-			for(var k in servers){
-				var s=servers[k];
+			for(var _s in servers){
+				var s=servers[_s];
 				if(!v3(s.x+rot,s.y))continue;
-				var x=x3(s.x+rot,s.y,d);
-				var y=y3(s.x,s.y,d);
+				s.cx=x3(s.x+rot,s.y,d);
+				s.cy=y3(s.x,s.y,d);
 				ctx.beginPath();
-				ctx.arc(x,y,5,0,Math.PI*2,false);
+				ctx.arc(s.cx,s.cy,5,0,Math.PI*2,false);
 				//console.log(x,y);
 				//console.log(Math.sqrt((m.x-x)*(m.x-x)+(m.y-y)*(m.y-y)));
-				if(Math.sqrt((m.mx-x)*(m.mx-x)+(m.my-y)*(m.my-y)) <= 9){
+				if(Math.sqrt((m.mx-s.cx)*(m.mx-s.cx)+(m.my-s.cy)*(m.my-s.cy)) <= 9){
 					m.hover=s;
 					ctx.fill();
 				}
