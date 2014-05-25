@@ -1,8 +1,8 @@
 MOS
 ===
 
-The Monochrome Operating System, virus free since 1990.
-Moss is green. MOS is green.
-You can visually connect windows with data pipes.
+Hack servers with 1337 sk111z and the Monochrome Operating System, virus free since 1990.
 
-It's also this game where you hack suff. FYIBTWBRBBMWBBQBBcodeBBgunBBBBbbbBbbB.
+#### 
+
+Moss is green and MOS is green.

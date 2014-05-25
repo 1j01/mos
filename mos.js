@@ -165,7 +165,7 @@ function Icon(ob, $parent){
 	if(o.cmd==="worldmap"){
 		o.$img.src=worldMapIconURI;
 	}else{
-		o.$img.src="icons/"+((o.type=="link"&&o.cmd&&o.cmd.match(/^[\w\-]+$/))?o.cmd:o.type)+"";
+		o.$img.src="icons/"+((o.type=="link"&&o.cmd&&o.cmd.match(/^[\w\-]+$/))?o.cmd:o.type)+(o.cmd==="monochromium"?".png":".svg");
 	}
 	o.$img.draggable=false;
 	
