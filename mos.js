@@ -123,15 +123,15 @@ function Icon(ob, $parent){
 	
 	for(var k in ob){
 		if(ob.hasOwnProperty(k)){
-			o[k]=ob[k];
+			o[k] = ob[k];
 		}
 	}
-	o.name = ob.name || (ob.cmd && o.cmd.replace(/\b\w/,function(m){return m.toUpperCase();}));
+	o.name = ob.name || (ob.cmd && o.cmd.replace(/\b\w/, function(m){return m.toUpperCase();}));
 	
 	o.$name.innerText = o.name;
 	o.$div.onclick = function(){
 		if(o.cmd){
-			o.ret=EXECUTE_MALICIOUS(o.cmd,openTerminalIfUsed);
+			o.ret = EXECUTE_MALICIOUS(o.cmd, openTerminalIfUsed);
 		}else if(o.type=="text"){
 			new MosPad(o);
 		}else if(o.type=="folder"){
@@ -162,11 +162,7 @@ function Icon(ob, $parent){
 	o.$div.className="icon";
 	o.$name.className="name";
 	o.$img.onerror=function(){};
-	if(o.cmd==="worldmap"){
-		o.$img.src=worldMapIconURI;
-	}else{
-		o.$img.src="icons/"+((o.type=="link"&&o.cmd&&o.cmd.match(/^[\w\-]+$/))?o.cmd:o.type)+(o.cmd==="monochromium"?".png":".svg");
-	}
+	o.$img.src="icons/"+((o.type=="link"&&o.cmd&&o.cmd.match(/^[\w\-]+$/))?o.cmd:o.type)+(o.cmd.match(/monochromium|worldmap/)?".png":".svg");
 	o.$img.draggable=false;
 	
 	return o;
@@ -421,6 +417,7 @@ function lineXrect(x1,y1,x2,y2, x,y,w,h){
 function pointXrect(x1,y1, x,y,w,h){
 	return (x1>=x && y1>=y && x1<=x+w && y1<=y+h);
 }
+// @TODO: this should be a constructor
 openTerminalIfUsed = {
 	log: function(str){
 		//if(!this.m)
@@ -478,11 +475,10 @@ addEventListener("keydown",function(e){
 	if(e.altKey && e.keyCode==84){
 		new Terminal().position("center");
 		e.preventDefault();
-		return false;
 	}
 },true);
 addEventListener('contextmenu', function(e){
-	e.preventDefault();return!1;
+	e.preventDefault();
 }, true);
 
 
