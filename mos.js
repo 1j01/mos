@@ -162,7 +162,7 @@ function Icon(ob, $parent){
 	o.$div.className="icon";
 	o.$name.className="name";
 	o.$img.onerror=function(){};
-	o.$img.src="icons/"+((o.type=="link"&&o.cmd&&o.cmd.match(/^[\w\-]+$/))?o.cmd:o.type)+(o.cmd.match(/monochromium|worldmap/)?".png":".svg");
+	o.$img.src="images/icons/"+((o.type=="link"&&o.cmd&&o.cmd.match(/^[\w\-]+$/))?o.cmd:o.type)+(o.cmd.match(/monochromium|worldmap/)?".png":".svg");
 	o.$img.draggable=false;
 	
 	return o;

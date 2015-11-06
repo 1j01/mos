@@ -12,7 +12,7 @@
 }
 
 .dragging-somewhere * {
-	cursor: url("cursors/move.png") 16 16, move !important;
+	cursor: url("images/cursors/move.png") 16 16, move !important;
 }
 .dragging-somewhere iframe {
 	pointer-events: none;
@@ -24,7 +24,7 @@
 .modal * {
     outline: none;
     border: none;
-    cursor: url("cursors/default.png") 2 2, default;
+    cursor: url("images/cursors/default.png") 2 2, default;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -44,7 +44,7 @@
     -moz-user-select: text;
     -ms-user-select: text;
     user-select: text;
-    cursor: url("cursors/text.png") 16 16, auto;
+    cursor: url("images/cursors/text.png") 16 16, auto;
 }
 .modal.dragging textarea,
 .modal.dragging input {
@@ -52,7 +52,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    cursor: url("cursors/default.png") 2 2, default;
+    cursor: url("images/cursors/default.png") 2 2, default;
 }
 .modal {
 	-webkit-transition: opacity .5s ease-in-out;
@@ -90,11 +90,11 @@
 .modal .titlebar {
 	background: #000;
     background: rgba(0,0,0,0.5);
-    cursor: url("cursors/move.png") 16 16, move;
+    cursor: url("images/cursors/move.png") 16 16, move;
     border-bottom: 1px solid rgba(0,255,0,0.4);
 }
 .modal .title {
-	cursor: url("cursors/move.png") 16 16, move;
+	cursor: url("images/cursors/move.png") 16 16, move;
     color: #0C0;
     font-weight: lighter;
 }
@@ -109,7 +109,7 @@
     color: rgb(0,255,0);
 }
 .modal .close-x {
-	cursor: url("cursors/pointer.png") 5 2, pointer !important;
+	cursor: url("images/cursors/pointer.png") 5 2, pointer !important;
 	font-size: 1.1em;
 	line-height: 0.25em;
 	float: right;
@@ -147,7 +147,7 @@
     background: rgba(0,0,0,0.1);
     color: #0C0;
     border: 0;
-    cursor: url("cursors/pointer.png") 2 2, pointer;
+    cursor: url("images/cursors/pointer.png") 2 2, pointer;
     -webkit-transition-duration: .1s;
     -moz-transition-duration: .1s;
     -o-transition-duration: .1s;
@@ -170,7 +170,7 @@
 .modal input, 
 .modal textarea,
 .modal .input {
-	height:1.1em;
+	height: 1.1em;
 	color: rgb(0,255,0);
 	background: #000;
 	outline: solid 1px rgba(0,255,0,0.3);
@@ -188,12 +188,15 @@
 	-webkit-appearance: none;
 	-moz-appearance: none;
 }
-.modal input[type="number"]{width:40px}
+.modal input[type="number"]{
+	width: 40px;
+}
 .modal input[type="checkbox"]{
-	background:#000;
-	-webkit-appearance:none;
-	-moz-appearance:none;
-	width:12px;height:12px;
+	background: #000;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	width: 12px;
+	height: 12px;
 	line-height: 10px;
 	vertical-align: top;
 }
@@ -217,13 +220,18 @@
 	transition: outline .2s ease;
 }
 .modal ul,
-.modal ol {list-style:none;margin:0;padding:0;}
+.modal ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
 
 
 ::-webkit-scrollbar {
 	width: 10px;
 	height: 10px;
 	background: black;
+	background: transparent;
 	display: block;
 }
 ::-webkit-scrollbar-thumb {

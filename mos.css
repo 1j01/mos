@@ -17,16 +17,12 @@ html {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	cursor: url("cursors/default.png") 2 2, default;
+	cursor: url("images/cursors/default.png") 2 2, default;
 	height: 100%;
 	/*-webkit-filter: sepia() hue-rotate(50deg) saturate(5);*/
 }
 body {
 	height: 100%;
-	/*
-	background-image: url(moss.jpg);
-	background-size: 100%;
-	*/
 }
 
 /*.terminal .content*/ 
@@ -43,7 +39,7 @@ body {
 	height: 100px;
 	display: inline-block;
 	text-align: center;
-	cursor: url("cursors/pointer.png") 5 2, pointer;
+	cursor: url("images/cursors/pointer.png") 5 2, pointer;
 }
 .icon:hover {
 	-webkit-filter: brightness(120%);
@@ -164,7 +160,7 @@ body {
 	border-left: 2px solid #0F0 !important;
 }
 .ace_gutter, .ace_content, .ace_scroller {
-	background: #000000 !important;
+	background: transparent !important;
 }
 .ace_selection {
 	background: rgba(0,255,0,0.3) !important;
@@ -215,8 +211,8 @@ body {
 .ace_text-layer {
 	color: #00E100 !important;
 }
-html:not(.dragging-somewhere) .ace_editor * {
-	cursor: url("cursors/text.png") 16 16, text !important;
+html:not(.dragging-somewhere) .ace_editor *:not(.ace_scrollbar) {
+	cursor: url("images/cursors/text.png") 16 16, text !important;
 }
 .ace_cursor {
 	border-left: 2px solid #00FF00;
