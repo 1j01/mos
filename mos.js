@@ -60,7 +60,7 @@ function EXECUTE_MALICIOUS(str, terminal){
 		}
 	}
 	
-	terminal&&terminal.log(ret);
+	terminal && terminal.log(ret);
 	return ret;
 }
 
@@ -81,7 +81,7 @@ function help(on){
 	}
 	return "No help found for \""+on+"\". (Enter \"?\" for general help.)";
 }
-function open(prg,arg){
+function open(prg, arg){
 	var m = null;
 	switch(prg.toLowerCase()){
 		case "terminal":
@@ -91,6 +91,7 @@ function open(prg,arg){
 			m = new MosPad(arg);
 			break;
 		case "filebrowser":
+		case "files":
 		case "folder":
 			m = new FileBrowser(arg && filepath(arg));
 			break;
@@ -100,6 +101,7 @@ function open(prg,arg){
 		case "worldmap":
 			m = new WorldMap();
 			break;
+		case "monochrome":
 		case "monochromium":
 			m = new MonoChromium();
 			break;
@@ -133,7 +135,7 @@ function Icon(ob, $parent){
 		if(o.cmd){
 			o.ret = EXECUTE_MALICIOUS(o.cmd, openTerminalIfUsed);
 		}else if(o.type=="text"){
-			new MosPad(o);
+			new MosPad(o.name);
 		}else if(o.type=="folder"){
 			new FileBrowser(o.fname);
 		}else{
@@ -162,7 +164,9 @@ function Icon(ob, $parent){
 	o.$div.className="icon";
 	o.$name.className="name";
 	o.$img.onerror=function(){};
-	o.$img.src="images/icons/"+((o.type=="link"&&o.cmd&&o.cmd.match(/^[\w\-]+$/))?o.cmd:o.type)+(o.cmd.match(/monochromium|worldmap/)?".png":".svg");
+	o.$img.src = "images/icons/" +
+		((o.type=="link" && o.cmd && o.cmd.match(/^[\w\-]+$/)) ? o.cmd : o.type) +
+		(/monochromium|worldmap/.exec(o.cmd) ? ".png" : ".svg");
 	o.$img.draggable=false;
 	
 	return o;
