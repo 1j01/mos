@@ -91,21 +91,36 @@ body {
 	width: 100%;
 }
 
-
-.monochromium input {
+.monochromium .bar {
+	display: flex;
+	padding: 2px;
+	align-items: center;
+}
+.monochromium .bar > * {
+	display: flex;
+	flex-basis: auto;
+	flex-grow: 0;
+	flex-shrink: 0;
+	height: 1.5em;
+	line-height: 1;
+	box-sizing: border-box;
+}
+.monochromium .bar input {
 	margin: 2px;
+	flex-grow: 1;
 }
-.monochromium button {
-	float: left;
-}
-.monochromium button.hotdog {
-	float: right;
+.iframe-wrapper {
+	background: rgb(0,255,0);
 }
 .webbrowser iframe {
 	min-width: 700px;
 	min-height: 500px;
-	//-webkit-filter: invert() sepia() hue-rotate(-30deg) sepia() hue-rotate(90deg) brightness(10%) saturate(50) brightness(150%);
-	//-webkit-filter: invert() sepia() hue-rotate(30deg) saturate(50) hue-rotate(30deg);
+	background: white;
+	filter: invert();
+	-ms-filter: invert();
+	-moz-filter: invert();
+	-webkit-filter: invert();
+	mix-blend-mode: multiply;
 }
 
 

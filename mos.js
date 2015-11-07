@@ -76,8 +76,8 @@ function help(on){
 		case "terminal": return "terminal [cmds]\nOpens a new terminal instance and executes any given commands in the new instance.";
 		case "monochromium": return "monochromium [url ]+\nopens monochromium web browser at the given url(s).";
 		case "servers": return "servers\nopens known servers viewer.";
-		case "mospad": return "mospad [filepath]\nopens a text editor with the given file or a blank file.";
-		case "filebrowser": return "filebrowser [filepath]\nopens a text editor with the given file or a blank file.";
+		case "mospad": return "mospad [file-path]\nopens a text editor with the given file or a blank file.";
+		case "filebrowser": return "filebrowser [folder-path]\nopens a folder specified by the given path.";
 	}
 	return "No help found for \""+on+"\". (Enter \"?\" for general help.)";
 }
@@ -464,7 +464,9 @@ new FolderView($desktop);
 new Icon({type:"link",cmd:"terminal",name:"Terminal"});
 new Icon({type:"link",cmd:"mospad"});
 new Icon({type:"link",cmd:"worldmap",name:"World Map"});
-if(Math.random()<0.01)new Icon({type:"link",cmd:"monochromium",name:"MonoChrome"});
+if(typeof process !== "undefined" || location.hash.match(/MonoChromium/i)){
+	new Icon({type:"link",cmd:"monochromium",name:"MonoChrome"});
+}
 /*link("terminal");
 link("mospad");
 //link("webbrowser");
