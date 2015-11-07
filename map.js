@@ -82,7 +82,7 @@ function WorldMap(){
 	}
 	
 	function createEarth(radius, segments){
-		var earthTexture = THREE.ImageUtils.loadTexture("images/earth-outlines.png");
+		var earthTexture = THREE.ImageUtils.loadTexture("images/future-earth.png");
 		earthTexture.anisotropy = renderer.getMaxAnisotropy();
 		var earthMaterial = new THREE.MeshBasicMaterial({
 			map: earthTexture,
@@ -96,6 +96,7 @@ function WorldMap(){
 	
 	// TODO: add back servers
 	// TODO: constrain zoom
+	// TODO: find a way of normalizing the line thickness (with a shader)
 	
 	return m;
 }
