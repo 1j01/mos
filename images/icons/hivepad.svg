@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="300"
+   height="300"
+   id="svg4136"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="hivepad.svg">
+  <metadata
+     id="metadata4151">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>MOSpad</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4149" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1858"
+     inkscape:window-height="1057"
+     id="namedview4147"
+     showgrid="false"
+     inkscape:zoom="1.046518"
+     inkscape:cx="326.41205"
+     inkscape:cy="36.037556"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4136" />
+  <title
+     id="title4138">MOSpad</title>
+  <g
+     id="svg_1">
+    <path
+       style="fill:#009600;stroke:#00ff00;stroke-width:5;stroke-dasharray:none"
+       inkscape:connector-curvature="0"
+       stroke-linejoin="null"
+       stroke-linecap="null"
+       d="m 85.286,269.33701 c -2.03101,-10.71402 0.937,-34.427 -1.094,-45.14101 l -49.3812,-1.035 48.4752,45.17601 134.376,1 0,-241.04801 -182.85118,0 -1,195.872"
+       id="svg_2"
+       transform="matrix(-1,0,0,-1,252.474,297.626)" />
+  </g>
+  <path
+     sodipodi:type="star"
+     style="opacity:1;fill:#009600;fill-opacity:1;stroke:#00ff00;stroke-width:5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path4153"
+     sodipodi:sides="6"
+     sodipodi:cx="42.567567"
+     sodipodi:cy="193.91892"
+     sodipodi:r1="36.642559"
+     sodipodi:r2="31.733387"
+     sodipodi:arg1="1.5707963"
+     sodipodi:arg2="2.0943951"
+     inkscape:flatsided="true"
+     inkscape:rounded="0"
+     inkscape:randomized="0"
+     d="m 42.567567,230.56147 -31.733388,-18.32127 -1e-6,-36.64256 31.733387,-18.32128 31.733387,18.32127 1e-6,36.64256 z" />
+  <path
+     sodipodi:type="star"
+     style="opacity:1;fill:#009600;fill-opacity:1;stroke:#00ff00;stroke-width:5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path4153-7"
+     sodipodi:sides="6"
+     sodipodi:cx="105.99662"
+     sodipodi:cy="194.25677"
+     sodipodi:r1="36.642559"
+     sodipodi:r2="31.733387"
+     sodipodi:arg1="1.5707963"
+     sodipodi:arg2="2.0943951"
+     inkscape:flatsided="true"
+     inkscape:rounded="0"
+     inkscape:randomized="0"
+     d="m 105.99662,230.89933 -31.733386,-18.32127 -10e-7,-36.64256 31.733387,-18.32128 31.73339,18.32127 0,36.64256 z" />
+  <path
+     sodipodi:type="star"
+     style="opacity:1;fill:#009600;fill-opacity:1;stroke:#00ff00;stroke-width:5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="path4153-8"
+     sodipodi:sides="6"
+     sodipodi:cx="74.408785"
+     sodipodi:cy="248.64863"
+     sodipodi:r1="36.642559"
+     sodipodi:r2="31.733387"
+     sodipodi:arg1="1.5707963"
+     sodipodi:arg2="2.0943951"
+     inkscape:flatsided="true"
+     inkscape:rounded="0"
+     inkscape:randomized="0"
+     d="m 74.408784,285.29119 -31.733388,-18.32127 -10e-7,-36.64256 31.733387,-18.32128 31.733388,18.32128 0,36.64255 z" />
+  <path
+     style="fill:#009600;stroke:#00ff00;stroke-width:5"
+     inkscape:connector-curvature="0"
+     id="svg_3"
+     d="m 258,71 -125,128 -6,21 21,-8 L 272,85 258,71 Z" />
+</svg>
