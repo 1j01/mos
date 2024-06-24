@@ -4,18 +4,18 @@ window.MonoChromium = function (url) {
 	m.className = "webbrowser monochromium";
 	m.$m.className += " webbrowser monochromium";
 	m.title("Elgoog MonoChrome");
-	m.content(
-		"<div class='bar'>" +
-		"<button class='back'>&#x2190;</button>" +
-		"<button class='forwards'>&#x2192;</button>" +
-		"<button class='reload'>&#x21BB;</button>" +
-		"<input spellcheck='false'/>" +
-		"<button class='hotdog'>&equiv;</button>" +
-		"</div>" +
-		"<div class='iframe-wrapper'>" +
-		"<iframe nwdisable nwfaketop nwUserAgent='Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) MonoChrome/41.0.2228.0 Safari/537.36'>" +
-		"</div>"
-	);
+	m.content(`
+		<div class='bar'>
+			<button class='back'>&#x2190;</button>
+			<button class='forwards'>&#x2192;</button>
+			<button class='reload'>&#x21BB;</button>
+			<input spellcheck='false'/>
+			<button class='hotdog'>&equiv;</button>
+		</div>
+		<div class='iframe-wrapper'>
+			<iframe nwdisable nwfaketop nwUserAgent='Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) MonoChrome/41.0.2228.0 Safari/537.36'>
+		</div>
+	`);
 	var $if = m.$("iframe");
 	//$if.sandbox = "allow-scripts allow-same-origin";
 	var $in = m.$("input");
