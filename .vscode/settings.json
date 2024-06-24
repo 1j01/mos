@@ -1,0 +1,13 @@
+{
+	"workbench.colorTheme": "PipBoy Theme",
+	// PipBoy theme font configuration.
+	"editor.fontFamily": "Monofonto, Consolas, 'Courier New', monospace",
+	"editor.fontSize": 14,
+	"editor.letterSpacing": 0.5,
+	"terminal.integrated.fontSize": 15,
+	"terminal.integrated.lineHeight": 1.1,
+	"terminal.integrated.letterSpacing": 1.1,
+	"terminal.integrated.fontFamily": "Fixedsys Excelsior, monospace",
+	// Avoid extra colors
+	"editor.bracketPairColorization.enabled": false,
+}
