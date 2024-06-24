@@ -2,12 +2,18 @@
 	"recommendations": [
 		// "camilamartinezbedoya.pro-hacker-theme",
 		// "convolution.zone-green",
-		"smv7.pipboy-theme"
+		"smv7.pipboy-theme",
+		"krueger71.crt-themes"
 	]
 	// Green:
+	// https://vscodethemes.com/e/krueger71.crt-themes/crt-green?language=javascript
+	// https://vscodethemes.com/e/mikesources.mike-sources-pack/mike-sources-green-crt?language=javascript
 	// https://vscodethemes.com/e/camilamartinezbedoya.pro-hacker-theme/pro-hacker-theme?language=javascript
+	// https://vscodethemes.com/e/leandro-rodrigues.crt-vscode/crt-ui-default?language=javascript
+	// https://vscodethemes.com/e/piworzuop.piworzuop-dark-theme/piworzuop-dark-theme?language=javascript
 	// https://vscodethemes.com/e/bhupenderojha.hacker-world/hacker-world?language=javascript
 	// https://vscodethemes.com/e/smv7.pipboy-theme/pipboy-theme?language=javascript
+	// https://vscodethemes.com/e/j3nggg26.greeny/greeny?language=javascript
 	// https://vscodethemes.com/e/luckcga.lucky-hub/luckcga?language=javascript
 	// https://vscodethemes.com/e/emiliano-sanchez-m.neon-hacker/emiliano-sanchez-madrid?language=javascript
 	// https://vscodethemes.com/e/jeremycantu.hack3r-theme/hack3r?language=javascript
@@ -21,11 +27,28 @@
 	// https://vscodethemes.com/e/mvacoimbra.mr-hackerman-theme/hackerman-theme?language=javascript
 	// https://vscodethemes.com/e/rudeboyenterprises.rbe-matrix-skin-theme/rbe-matrix-skin-theme?language=javascript
 	// https://vscodethemes.com/e/convolution.zone-green/zone-green?language=javascript
+	// https://vscodethemes.com/e/s7a19t4r.homebrew-dark/homebrew-dark?language=javascript
+	// https://vscodethemes.com/e/easyturbo.hi-c-dark-neon/hi-c-dark-neon?language=javascript
+	// https://vscodethemes.com/e/elizamuss.elizas-pride-themes/aromantic?language=javascript
+	// https://vscodethemes.com/e/97a3a878637c6a75bd87a20a0d1a1d21.extreme-theme/extreme-dark-theme?language=javascript
 	// Red:
+	// https://vscodethemes.com/e/krueger71.crt-themes/crt-red?language=javascript
 	// https://vscodethemes.com/e/hellbill.deep-red/deep-blood-red?language=javascript
 	// https://vscodethemes.com/e/krazygfx.horror-synthwave/extension-darksynth-horror?language=javascript
+	// https://vscodethemes.com/e/hellbill.ninja-theme/dark-theme-for-ninjas?language=javascript
 	// Pink:
 	// https://vscodethemes.com/e/xynny.hacker-pink/hacker-pink?language=javascript
 	// Blue:
+	// https://vscodethemes.com/e/krueger71.crt-themes/crt-blue?language=javascript
 	// https://vscodethemes.com/e/chausen.hacker-blue/hacker-blue?language=javascript
+	// https://vscodethemes.com/e/leandro-rodrigues.crt-vscode/crt-ui-blue-p55-bam-phosphor?language=javascript
+	// Amber:
+	// https://vscodethemes.com/e/krueger71.crt-themes/crt-amber?language=javascript
+	// https://vscodethemes.com/e/sjsepan.sjsepan-ambercrtish/ambercrtish?language=javascript
+	// https://vscodethemes.com/e/leandro-rodrigues.crt-vscode/crt-ui-amber-p3-phosphor?language=javascript
+	// White:
+	// https://vscodethemes.com/e/seppzer0.silent-writing/silent-writing?language=javascript
+	// https://vscodethemes.com/e/0xdhrv.monove/monove?language=javascript
+	// https://vscodethemes.com/e/ccssmnn.monochrome-tailwind-colors/monochrome-zinc-dark?language=javascript
+	// (and many more)
 }
