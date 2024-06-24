@@ -1,12 +1,17 @@
-
 #gui-overlay {
-	position:absolute;
-	left:0;top:0;bottom:0;right:0;
-	margin:0;padding:0;border:0;
-	overflow:hidden;
-	pointer-events:none;
-    font-family: monospace;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	overflow: hidden;
+	pointer-events: none;
+	font-family: monospace;
 }
+
 #gui-overlay .modal {
 	pointer-events: all;
 }
@@ -14,100 +19,119 @@
 .dragging-somewhere * {
 	cursor: url("images/cursors/move.png") 16 16, move !important;
 }
+
 .dragging-somewhere iframe {
 	pointer-events: none;
 }
 
-.modal.closing, .modal.closing * {
+.modal.closing,
+.modal.closing * {
 	pointer-events: none !important;
 }
+
 .modal * {
-    outline: none;
-    border: none;
-    cursor: url("images/cursors/default.png") 2 2, default;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-transition: opacity .2s ease-in-out, background .2s ease-in-out, color .2s ease-in-out;
-    -moz-transition: opacity .2s ease-in-out, background .2s ease-in-out, color .2s ease-in-out;
-    -o-transition: opacity .2s ease-in-out, background .2s ease-in-out, color .2s ease-in-out;
-    transition: opacity .2s ease-in-out, background .2s ease-in-out, color .2s ease-in-out;
+	outline: none;
+	border: none;
+	cursor: url("images/cursors/default.png") 2 2, default;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-transition: opacity .2s ease-in-out, background .2s ease-in-out, color .2s ease-in-out;
+	-moz-transition: opacity .2s ease-in-out, background .2s ease-in-out, color .2s ease-in-out;
+	-o-transition: opacity .2s ease-in-out, background .2s ease-in-out, color .2s ease-in-out;
+	transition: opacity .2s ease-in-out, background .2s ease-in-out, color .2s ease-in-out;
 }
-.modal ::-moz-focus-inner {border:0;}
+
+.modal ::-moz-focus-inner {
+	border: 0;
+}
 
 .modal textarea,
 .modal input,
 .modal p,
-[contenteditable]{
-    -webkit-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-    user-select: text;
-    cursor: url("images/cursors/text.png") 16 16, auto;
+[contenteditable] {
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+	cursor: url("images/cursors/text.png") 16 16, auto;
 }
+
 .modal.dragging textarea,
 .modal.dragging input {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: url("images/cursors/default.png") 2 2, default;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: url("images/cursors/default.png") 2 2, default;
 }
+
 .modal {
 	-webkit-transition: opacity .5s ease-in-out;
 	-moz-transition: opacity .5s ease-in-out;
 	-o-transition: opacity .5s ease-in-out;
 	transition: opacity .5s ease-in-out;
-    position: absolute;
-    background: #000;
-    background: rgba(0,0,0,0.3);
-    color: #0F0;
-    opacity: 0.8;
-    border: 1px solid rgba(0,255,0,0.4);
-    padding: 4px;
+	position: absolute;
+	background: #000;
+	background: rgba(0, 0, 0, 0.3);
+	color: #0F0;
+	opacity: 0.8;
+	border: 1px solid rgba(0, 255, 0, 0.4);
+	padding: 4px;
 }
-.modal:hover, .modal.dragging {
-    opacity: 1;
-}
+
+.modal:hover,
 .modal.dragging {
-    -webkit-transition: opacity .8s ease;
-    -moz-transition: opacity .8s ease;
-    -o-transition: opacity .8s ease;
-    transition: opacity .8s ease;
+	opacity: 1;
 }
+
+.modal.dragging {
+	-webkit-transition: opacity .8s ease;
+	-moz-transition: opacity .8s ease;
+	-o-transition: opacity .8s ease;
+	transition: opacity .8s ease;
+}
+
 .modal .content {
 	background: #000;
-    background: rgba(0,0,0,0.9);
-    color: #0F0;
+	background: rgba(0, 0, 0, 0.9);
+	color: #0F0;
 }
+
 .modal .resizable {
 	resize: both !important;
 }
+
 .modal .resizable * {
 	resize: none;
 }
+
 .modal .titlebar {
 	background: #000;
-    background: rgba(0,0,0,0.5);
-    cursor: url("images/cursors/move.png") 16 16, move;
-    border-bottom: 1px solid rgba(0,255,0,0.4);
+	background: rgba(0, 0, 0, 0.5);
+	cursor: url("images/cursors/move.png") 16 16, move;
+	border-bottom: 1px solid rgba(0, 255, 0, 0.4);
 }
+
 .modal .title {
 	cursor: url("images/cursors/move.png") 16 16, move;
-    color: #0C0;
-    font-weight: lighter;
+	color: #0C0;
+	font-weight: lighter;
 }
+
 .modal:hover .titlebar {
 	background: #000;
-    background: rgba(0,0,0,0.7);
+	background: rgba(0, 0, 0, 0.7);
 }
+
 .modal .titlebar.titlebar.titlebar:hover,
 .modal.dragging .titlebar.titlebar.titlebar {
-	background: rgb(0,66,0);
-    background: rgba(0,55,0,0.8);
-    color: rgb(0,255,0);
+	background: rgb(0, 66, 0);
+	background: rgba(0, 55, 0, 0.8);
+	color: rgb(0, 255, 0);
 }
+
 .modal .close-x {
 	cursor: url("images/cursors/pointer.png") 5 2, pointer !important;
 	font-size: 1.1em;
@@ -116,71 +140,87 @@
 	width: 0.5em;
 	height: 0.5em;
 	color: #0B0;
-	color: rgba(0,255,0,0.5);
+	color: rgba(0, 255, 0, 0.5);
 	opacity: 0;
 	padding: 5px 5px 0 0;
 }
+
 .modal:hover .close-x {
 	opacity: 0.5;
 	color: #0B0;
-	color: rgba(0,255,0,0.5);
+	color: rgba(0, 255, 0, 0.5);
 }
+
 .modal .close-x.close-x.close-x.close-x:hover {
 	opacity: 1;
-	color: rgb(0,255,0);
+	color: rgb(0, 255, 0);
 }
+
 .modal .close-x.close-x.close-x.close-x:active {
 	color: #0B0;
-	color: rgba(0,255,0,0.5);
+	color: rgba(0, 255, 0, 0.5);
 }
+
 .modal .close-x:after {
 	content: "×";
 }
+
 .modal p,
-.modal .padded{padding:5px;line-height:1.8em;}
-.modal p{margin:0}
+.modal .padded {
+	padding: 5px;
+	line-height: 1.8em;
+}
+
+.modal p {
+	margin: 0
+}
 
 .modal button,
 .modal .button,
-.modal input[type="submit"]{
+.modal input[type="submit"] {
 	background: #000;
-    background: rgba(0,0,0,0.1);
-    color: #0C0;
-    border: 0;
-    cursor: url("images/cursors/pointer.png") 2 2, pointer;
-    -webkit-transition-duration: .1s;
-    -moz-transition-duration: .1s;
-    -o-transition-duration: .1s;
-    outline: 1px solid rgba(0,255,0,0.4);
+	background: rgba(0, 0, 0, 0.1);
+	color: #0C0;
+	border: 0;
+	cursor: url("images/cursors/pointer.png") 2 2, pointer;
+	-webkit-transition-duration: .1s;
+	-moz-transition-duration: .1s;
+	-o-transition-duration: .1s;
+	outline: 1px solid rgba(0, 255, 0, 0.4);
 }
+
 .modal button:hover,
 .modal .button:hover,
 .modal input[type="submit"]:hover {
 	background: #050;
-    background: rgba(0,255,0,0.2);
-    color: #0F0;
+	background: rgba(0, 255, 0, 0.2);
+	color: #0F0;
 }
+
 .modal button:active,
 .modal .button:active,
 .modal input[type="submit"]:active {
 	background: #030;
-    background: rgba(0,255,0,0.1);
-    color: rgb(0,255,0);
+	background: rgba(0, 255, 0, 0.1);
+	color: rgb(0, 255, 0);
 }
-.modal input, 
+
+.modal input,
 .modal textarea,
 .modal .input {
 	height: 1.1em;
-	color: rgb(0,255,0);
+	color: rgb(0, 255, 0);
 	background: #000;
-	outline: solid 1px rgba(0,255,0,0.3);
+	outline: solid 1px rgba(0, 255, 0, 0.3);
 }
+
 .modal input:focus,
 .modal textarea:focus,
 .modal .input:focus {
-	outline: solid 1px rgba(0,255,0,0.8);
+	outline: solid 1px rgba(0, 255, 0, 0.8);
 	outline-offset: 0;
 }
+
 .modal input::-webkit-outer-spin-button,
 .modal input::-webkit-inner-spin-button {
 	background: black;
@@ -188,10 +228,12 @@
 	-webkit-appearance: none;
 	-moz-appearance: none;
 }
-.modal input[type="number"]{
+
+.modal input[type="number"] {
 	width: 40px;
 }
-.modal input[type="checkbox"]{
+
+.modal input[type="checkbox"] {
 	background: #000;
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -200,25 +242,29 @@
 	line-height: 10px;
 	vertical-align: top;
 }
+
 /* .modal input[type="checkbox"]:checked{
 	box-shadow: 0 0 5px #0C0;
 } */
-.modal input[type="checkbox"]::after{
+.modal input[type="checkbox"]::after {
 	content: "✓";
-	color: rgb(0,155,0);
+	color: rgb(0, 155, 0);
 	opacity: 0;
 }
-.modal input[type="checkbox"]:checked::after{
+
+.modal input[type="checkbox"]:checked::after {
 	content: "✓";
-	color: rgb(0,155,0);
+	color: rgb(0, 155, 0);
 	opacity: 1;
 }
+
 .modal textarea {
 	-webkit-transition: outline .2s ease;
 	-moz-transition: outline .2s ease;
 	-o-transition: outline .2s ease;
 	transition: outline .2s ease;
 }
+
 .modal ul,
 .modal ol {
 	list-style: none;
@@ -234,11 +280,13 @@
 	background: transparent;
 	display: block;
 }
+
 ::-webkit-scrollbar-thumb {
-	background: rgba(0,255,0,0.1);
-	border: 1px solid rgba(0,255,0,0.2);
+	background: rgba(0, 255, 0, 0.1);
+	border: 1px solid rgba(0, 255, 0, 0.2);
 }
+
 ::-webkit-scrollbar-thumb:hover {
-	background: rgba(0,255,0,0.2);
-	border: 1px solid rgba(0,255,0,0.3);
+	background: rgba(0, 255, 0, 0.2);
+	border: 1px solid rgba(0, 255, 0, 0.3);
 }

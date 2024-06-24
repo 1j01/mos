@@ -10,18 +10,18 @@ var BR = "<br>";
 
 */
 
-function MosPad(fname){
+function MosPad(fname) {
 	var m = new Modal();
 	m.className = "MosPad";
 	m.$m.className += " MosPad";
-	var file=null;
-	m.title((file&&file.name||"New")+" - MosPad");
+	var file = null;
+	m.title((file && file.name || "New") + " - MosPad");
 	m.content("<div class='editor'></div>");
-	var a=ace.edit(m.$(".editor"));
+	var a = ace.edit(m.$(".editor"));
 	a.renderer.setShowGutter(false);
 	a.setShowPrintMargin(false);
 	a.getSession().setUseSoftTabs(false);
-	if(fname){
+	if (fname) {
 		a.setValue(file_get_contents(fname));
 		a.gotoLine(0);
 	}
@@ -33,18 +33,18 @@ function MosPad(fname){
 			win: "Ctrl-F",
 			mac: "Command-F"
 		},
-		exec: function(editor, line) {
-			if(find){
+		exec: function (editor, line) {
+			if (find) {
 				find.close();
 			}//else{
-			find = gui.prompt("Find",a.session.getTextRange(a.getSelectionRange()),function(needle){
-				a.find(needle,{ backwards: false, wrap: true, caseSensitive: true, wholeWord: false, regExp: false });
+			find = gui.prompt("Find", a.session.getTextRange(a.getSelectionRange()), function (needle) {
+				a.find(needle, { backwards: false, wrap: true, caseSensitive: true, wholeWord: false, regExp: false });
 			});
 			//}
 			return false;
 		},
 		readOnly: true
-	},{
+	}, {
 		name: "save",
 		bindKey: {
 			win: "Ctrl-S",
@@ -52,73 +52,73 @@ function MosPad(fname){
 		},
 		exec: save,
 		readOnly: true
-	},{
+	}, {
 		name: "replace",
 		bindKey: {
 			win: "Ctrl-H",
 			mac: "Command-H"
 		},
-		exec: function(editor, line) {
+		exec: function (editor, line) {
 			return false;
 		},
 		readOnly: true
 	}]);
-	var mus,msa;
-	m.onclose = function(){
-		if(find)find.close();
-		if(mus){
+	var mus, msa;
+	m.onclose = function () {
+		if (find) find.close();
+		if (mus) {
 			mus.close();
-			mus=null;
-		}else if(a.getValue() !== (fname?file_get_contents(fname):"")){
-			mus=new Modal();
+			mus = null;
+		} else if (a.getValue() !== (fname ? file_get_contents(fname) : "")) {
+			mus = new Modal();
 			mus.title("Unsaved");
 			mus.content("The file has been changed.<br><button class='save'>Save</button><button class='close'>Close</button><button class='cancel'>Cancel</button>");
-			mus.$(".save").onclick = function(){
+			mus.$(".save").onclick = function () {
 				save();
-				if(file)m.close();
-				if(find)find.close();
+				if (file) m.close();
+				if (find) find.close();
 				mus.close();
 			};
-			mus.$(".close").onclick = function(){
+			mus.$(".close").onclick = function () {
 				m.close();
 				mus.close();
-				if(find)find.close();
+				if (find) find.close();
 			};
-			mus.$(".cancel").onclick = function(){
+			mus.$(".cancel").onclick = function () {
 				mus.close();
 			};
-			mus.onclose = function(){
+			mus.onclose = function () {
 				mus = null;
 				return true;
 			};
-			mus.position(m.x+100,m.y+100);
+			mus.position(m.x + 100, m.y + 100);
 			return false;
 		}
-		if(msa){
+		if (msa) {
 			msa.close();
-			msa=null;
+			msa = null;
 		}
 		return true;
 	};
-	function save(){
-		if(file&&file.fname){
+	function save() {
+		if (file && file.fname) {
 			file_put_contents(file.fname, a.getValue());
-			if(msa){
+			if (msa) {
 				msa.close();
 				msa = null;
 			}
-		}else{
-			if(msa){
+		} else {
+			if (msa) {
 				msa.close();
 				msa = null;
 			}
-			msa=gui.prompt("Save as...","",function(newname){
+			msa = gui.prompt("Save as...", "", function (newname) {
 				file = file || {};
 				file.fname = newname;
-				m.title(file.fname+" - MosPad");
+				m.title(file.fname + " - MosPad");
 				file_put_contents(file.fname, a.getValue());
 			}).position("center");
-			msa.onclose = function(){
+			msa.onclose = function () {
 				msa = null;
 				return true;
 			};
@@ -127,8 +127,8 @@ function MosPad(fname){
 	return m;
 }
 
-function Terminal(arg){
-	var cb=EXECUTE_MALICIOUS;
+function Terminal(arg) {
+	var cb = EXECUTE_MALICIOUS;
 	var m = new Modal();
 	m.className = "terminal";
 	m.$m.className += " terminal";
@@ -142,39 +142,39 @@ function Terminal(arg){
 	a.getSession().setUseSoftTabs(false);
 	a.focus();
 	m.terminal = {
-		log: function(str){
-			$lines.innerHTML += str.replace(/\n/g,BR)+BR;
+		log: function (str) {
+			$lines.innerHTML += str.replace(/\n/g, BR) + BR;
 		},
-		write: function(str){
-			$lines.innerHTML += str.replace(/\n/g,BR);
+		write: function (str) {
+			$lines.innerHTML += str.replace(/\n/g, BR);
 		},
-		clear: function(str){
-			$lines.innerHTML = (str||"").replace(/\n/g,BR);
+		clear: function (str) {
+			$lines.innerHTML = (str || "").replace(/\n/g, BR);
 		},
-		focus: function(){
+		focus: function () {
 			a.focus();
 		},
-		a:a,m:m
+		a: a, m: m
 	};
 	//console.log(a.commands);
-	var cmds=[],cmdi=null;
-	m.$m.addEventListener("click", function(){a.focus();}, true);
+	var cmds = [], cmdi = null;
+	m.$m.addEventListener("click", function () { a.focus(); }, true);
 	a.commands.addCommands([{
 		name: "execute",
 		bindKey: {
 			win: "Enter",
 			mac: "Enter"
 		},
-		exec: function(editor, line) {
-			var cmd = editor.getValue().replace(/[\n\r]/gim,"");
+		exec: function (editor, line) {
+			var cmd = editor.getValue().replace(/[\n\r]/gim, "");
 			editor.removeLines();
-			if(cmd){
-				m.terminal.log("<span class='PS2'>&gt;</span> "+cmd);
-				if(cmds.indexOf(cmd)!=-1){
-					cmds.splice(cmds.indexOf(cmd),1);
+			if (cmd) {
+				m.terminal.log("<span class='PS2'>&gt;</span> " + cmd);
+				if (cmds.indexOf(cmd) != -1) {
+					cmds.splice(cmds.indexOf(cmd), 1);
 				}
 				cmds.push(cmd);
-				cmdi=cmds.length;
+				cmdi = cmds.length;
 				cb(cmd, m.terminal);
 			}
 			return true;
@@ -184,16 +184,16 @@ function Terminal(arg){
 	a.commands.addCommands([{
 		name: "previous command",
 		bindKey: "Up",
-		exec: function(editor, line){
-			editor.setValue((--cmdi<0)?((cmdi=-1)&&""):cmds[cmdi].replace(/\n/,""));
+		exec: function (editor, line) {
+			editor.setValue((--cmdi < 0) ? ((cmdi = -1) && "") : cmds[cmdi].replace(/\n/, ""));
 			return false;
 		},
 		readOnly: true
-	},{
+	}, {
 		name: "next command",
 		bindKey: "Down",
-		exec: function(editor, line){
-			editor.setValue((++cmdi>=cmds.length)?((cmdi=cmds.length)&&""):cmds[cmdi].replace(/\n/,""));
+		exec: function (editor, line) {
+			editor.setValue((++cmdi >= cmds.length) ? ((cmdi = cmds.length) && "") : cmds[cmdi].replace(/\n/, ""));
 			return false;
 		},
 		readOnly: true
@@ -216,12 +216,12 @@ function Terminal(arg){
 		}
 		console.log(e.keyCode);
 	};*/
-	if(arg){
+	if (arg) {
 		cb(arg, m.terminal);
 	}
 	return m;
 }
-function WebBrowser(url){
+function WebBrowser(url) {
 	var m = new Modal();
 	m.className = "webbrowser";
 	m.$m.className += " webbrowser";
@@ -232,9 +232,9 @@ function WebBrowser(url){
 	return m;
 }
 
-function FileBrowser(path){
+function FileBrowser(path) {
 	var m = new Modal();
-	m.onclose=function(){
+	m.onclose = function () {
 		fv.destroy();
 		return true;
 	};
@@ -245,11 +245,11 @@ function FileBrowser(path){
 	var $path = m.$(".path");
 	var $files = m.$(".files");
 	var fv = new FolderView($files, path);
-	$path.contentEditable=true;
-	$path.innerText=path;
+	$path.contentEditable = true;
+	$path.innerText = path;
 	$path.focus();
-	$path.onkeypress=function(e){
-		if(e.keyCode===13){
+	$path.onkeypress = function (e) {
+		if (e.keyCode === 13) {
 			fv.path = $path.innerText;
 			return false;
 		}
